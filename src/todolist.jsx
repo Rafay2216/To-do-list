@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from 'react'
-import { FaSun, FaMoon } from 'react-icons/fa';
 import { TiTick } from "react-icons/ti";
 import { ImCross } from "react-icons/im";
+import { IoAddCircleSharp } from "react-icons/io5";
+
 
 
 
@@ -77,19 +78,21 @@ else{
   return (
    
     <>
- <div className='main'>
-  
+ <div>
+  <div className='drkbtn'>
        <button
         onClick={toggleTheme}
         className='toggler'>
       
 
-       {isDarkMode ? <FaSun  className='symbol' /> : <FaMoon className='symbol'/>}
+       {isDarkMode ? <FaSun  className='symbol' /> : <FaMoon />
+
+}
       </button>
 
-      
+      </div>
 
-     <div>
+     <div className='main'>
     <h1>Welcome to My To-Do-List App</h1>
 
     <div><input type="text"
@@ -99,7 +102,8 @@ else{
     <button 
     className='addbtn'
     onClick={addtask}>
-    add task
+    <IoAddCircleSharp className='symbol' />
+
     </button>
     </div>
 
