@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { FaSun, FaMoon } from 'react-icons/fa';
-
+import { TiTick } from "react-icons/ti";
+import { ImCross } from "react-icons/im";
 
 
 
@@ -12,6 +13,7 @@ function Todolist() {
     const [Task, setTask] = useState(["study","sleep","eat","race"]);
     const [newTask, setnewTask] = useState("");
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const [completed, setcompleted] = useState([])
 
     // Use effect to persist the theme in local storage
     useEffect(() => {
@@ -42,6 +44,7 @@ function Todolist() {
     function addtask(){
 if(newTask !==""){
       setTask(task=>[...task, newTask])
+    
 }
 else{
   alert("add task bro")
@@ -60,6 +63,9 @@ else{
     function  completedtask(index){
 
 
+      if(newTask !==""){
+        completedtask(task=>[...task, completedtask])
+  }
     }
 
    
@@ -71,18 +77,19 @@ else{
   return (
    
     <>
- <div>
+ <div className='main'>
+  
        <button
         onClick={toggleTheme}
-        className='switch'>
+        className='toggler'>
       
 
-       {isDarkMode ? <FaSun /> : <FaMoon/>}
+       {isDarkMode ? <FaSun  className='symbol' /> : <FaMoon className='symbol'/>}
       </button>
 
+      
 
-
-     <div className='main'>
+     <div>
     <h1>Welcome to My To-Do-List App</h1>
 
     <div><input type="text"
@@ -96,15 +103,19 @@ else{
     </button>
     </div>
 
+
     <ol>
+
       {Task.map((Task,index)=>
 <li key={index}>
   <span className='text'>{Task}</span>
   <button className='del' 
-  onClick={()=>deletetask(index)}>DELETE</button>
+  onClick={()=>deletetask(index)}><ImCross />
+  </button>
 
 <button className='comp' 
-  onClick={()=>completedtask(index)}>Completed</button>
+  onClick={()=>completedtask(index)}><TiTick />
+  </button>
 
 
 </li>
@@ -112,10 +123,6 @@ else{
       
     )}
     </ol>
-
-
- 
-
 
 
 
