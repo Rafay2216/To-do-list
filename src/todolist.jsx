@@ -1,5 +1,9 @@
-import React from 'react'
-import { useState } from 'react'
+import React,{useState,useEffect} from 'react'
+import { FaSun, FaMoon } from 'react-icons/fa';
+
+
+
+
 
 function Todolist() {
 
@@ -7,6 +11,24 @@ function Todolist() {
 
     const [Task, setTask] = useState(["study","sleep","eat","race"]);
     const [newTask, setnewTask] = useState("");
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Use effect to persist the theme in local storage
+    useEffect(() => {
+      const storedTheme = localStorage.getItem('theme');
+      setIsDarkMode(storedTheme === 'dark');
+    }, []);
+  
+    // Use effect to update the theme when it changes
+    useEffect(() => {
+      document.body.className = isDarkMode ? 'dark-theme' : 'light-theme';
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    }, [isDarkMode]);
+  
+    // Toggle the theme when the button is clicked
+    const toggleTheme = () => {
+      setIsDarkMode((prevMode) => !prevMode);
+    };
 
 
     function handleInputchange(event){
@@ -27,7 +49,11 @@ else{
 
     }
 
-    function deletetask(){
+    function deletetask(index){
+
+    const deletedtasks=Task.filter((_,i)=> i !==index)
+    setTask(deletedtasks)
+
 
     }
 
@@ -36,9 +62,26 @@ else{
 
     }
 
+   
+
+    
+
+
+
   return (
    
     <>
+ <div>
+       <button
+        onClick={toggleTheme}
+        className='switch'>
+      
+
+       {isDarkMode ? <FaSun /> : <FaMoon/>}
+      </button>
+
+
+
      <div className='main'>
     <h1>Welcome to My To-Do-List App</h1>
 
@@ -69,6 +112,16 @@ else{
       
     )}
     </ol>
+
+
+ 
+
+
+
+
+
+
+    </div>
 
    </div>
     </>

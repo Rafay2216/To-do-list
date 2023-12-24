@@ -2,7 +2,19 @@
 
 text-align: center;
 margin: 80px;
+transition: background-color 0.3s ease;
 
+
+}
+
+.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark-theme {
+  background-color: #1a1a1a;
+  color: #ffffff;
 }
 
 h1{
@@ -75,3 +87,11 @@ li{
 
   flex: 1;
 }
+
+.switch{
+
+  background-color: yellow;
+}
+.moon
+
+{background-color: red;}
